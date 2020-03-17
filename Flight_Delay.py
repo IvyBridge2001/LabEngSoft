@@ -37,6 +37,7 @@ def process(df,pathx,filex,origin,dest,deptPrev,deptAct):
         df = pd.get_dummies(df, columns=['Origin','Dest'])
         pathy = pathx + '\processed\\' + filex
         df.to_csv(pathy)
+        print(df.head)
         print(pathy+ 'successfully created at ' + str(datetime.now()))
     except Exceptio as e:
         print(e)
@@ -47,8 +48,6 @@ def main():
         fileToClean = "C:\\Users\\danie\\Desktop\\all\\vra_012019.csv" #Tem que ter uma pasta chamada 'processed' dentro do diretório que contém o .csv
         print(fileToClean)
         df = pd.read_csv(fileToClean,sep=';',encoding='latin')
-        print("ok")
-        print(df.head)
         pathx, filex = os.path.split(fileToClean)
         if origin1 in df:
             print('Processing of file '+filex+'began at'+str(datetime.now()))
