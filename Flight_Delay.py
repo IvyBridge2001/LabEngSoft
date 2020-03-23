@@ -39,24 +39,23 @@ def process(df,pathx,filex,origin,dest,deptPrev,deptAct):
         df.to_csv(pathy)
         print(df.head)
         print(pathy+ 'successfully created at ' + str(datetime.now()))
-    except Exceptio as e:
+    except Exception as e:
         print(e)
 
 #def main(arg1):
 def main():
     try:
-        fileToClean = "C:\\Users\\danie\\Desktop\\all\\vra_012019.csv" #Tem que ter uma pasta chamada 'processed' dentro do diretório que contém o .csv
+        fileToClean = "C:\\Users\\danie\\Desktop\\all\\vra_07_trans.csv" #Tem que ter uma pasta chamada 'processed' dentro do diretório que contém o .csv
         print(fileToClean)
-        df = pd.read_csv(fileToClean,sep=';',encoding='latin')
         pathx, filex = os.path.split(fileToClean)
         if origin1 in df:
-            print('Processing of file '+filex+'began at'+str(datetime.now()))
+            print('1 - Processing of file '+filex+' started at '+str(datetime.now()))
             process(df,pathx,filex,origin1,destination1,departPreview1,departActual1)
         elif origin2 in df:
-            print('Processing of file '+filex+'began at'+str(datetime.now()))
+            print('2 - Processing of file '+filex+' started at '+str(datetime.now()))
             process(df,pathx,filex,origin2,destination2,departPreview1,departActual1)
         elif origin3 in df:
-            print('Processing of file '+filex+'began at'+str(datetime.now()))
+            print('3 - Processing of file '+filex+' started at '+str(datetime.now()))
             process(df,pathx,filex,origin3,destination3,departPreview2,departActual2)
         print('Processing finished at ' + str(datetime.now()))
     except Exception as e:
