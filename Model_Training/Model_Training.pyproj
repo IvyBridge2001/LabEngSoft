@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>234c79cd-ef3f-4b79-bff4-8a948e4259d1</ProjectGuid>
+    <ProjectGuid>7fe8173f-16aa-486a-8213-ed52e40d5fd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Flight_Delay.py</StartupFile>
+    <StartupFile>Model_Training.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Flight_Delay</Name>
-    <RootNamespace>Flight_Delay</RootNamespace>
+    <Name>Model_Training</Name>
+    <RootNamespace>Model_Training</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Flight_Delay.py" />
+    <Compile Include="Model_Training.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
