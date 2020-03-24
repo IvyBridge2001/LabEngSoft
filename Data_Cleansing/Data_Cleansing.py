@@ -18,6 +18,7 @@ departPreview2 = 'dt_partida_prevista'
 departActual1 = 'Partida Real'
 departActual2 = 'dt_partida_real'
 count = 0
+airports = ['SBGR','SBGL','EGLL','KJFK','RJAA']
 
 def process(df,pathx,filex,origin,dest,deptPrev,deptAct):
     try:
@@ -28,12 +29,14 @@ def process(df,pathx,filex,origin,dest,deptPrev,deptAct):
         df["Month"] = df["Depart Prev"].dt.month
         df["Day"] = df["Depart Prev"].dt.day
         df["Hour"] = df["Depart Prev"].dt.hour
+        df["WeekDay"] = df["Depart Prev"].dt.dayofweek
         df["diff"] = df["Depart Act"] - df["Depart Prev"]
         df["diff"] = (df["diff"]).dt.total_seconds() / 60
         df = df.fillna({'diff': 1})
-        df["Delayed"] = [1 if x > 15 else 0 for x in df["diff"]]
+        df["Delayed"] = [1.0 if x > 15 else 0.0 for x in df["diff"]]
         df["Delayed"] = df["Delayed"].astype(float)
-        df = df[["Origin","Dest","Month","Day","Hour","Delayed"]]
+        df = df[["Origin","Dest","Month","Day","Hour","WeekDay","Delayed"]]
+        df = df[df.Origin.isin(airports) & df.Dest.isin(airports)]
         df = pd.get_dummies(df, columns=['Origin','Dest'])
         pathy = pathx + '\processed\\' + filex
         df.to_csv(pathy)
@@ -45,9 +48,10 @@ def process(df,pathx,filex,origin,dest,deptPrev,deptAct):
 #def main(arg1):
 def main():
     try:
-        fileToClean = "C:\\Users\\danie\\Desktop\\all\\vra_07_trans.csv" #Tem que ter uma pasta chamada 'processed' dentro do diretório que contém o .csv
+        fileToClean = "C:\\Users\\danie\\Desktop\\gru_data\\VRA_112019.csv" #Tem que ter uma pasta chamada 'processed' dentro do diretório que contém o .csv
         print(fileToClean)
         pathx, filex = os.path.split(fileToClean)
+        df = pd.read_csv(fileToClean,sep=';',encoding='latin')
         if origin1 in df:
             print('1 - Processing of file '+filex+' started at '+str(datetime.now()))
             process(df,pathx,filex,origin1,destination1,departPreview1,departActual1)
