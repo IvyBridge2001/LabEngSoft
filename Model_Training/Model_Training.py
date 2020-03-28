@@ -10,8 +10,6 @@
 #    temp_dfs.append(temp_df)
 #df = pd.concat(temp_dfs, axis=0, ignore_index=True)
 #df.to_csv(path+r'\2019.csv')
-
-
 import pandas as pd
 path = r"C:\Users\danie\Desktop\gru_data\2019.csv"
 df = pd.read_csv(path,sep=',')
@@ -24,7 +22,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 model = RandomForestClassifier(random_state=13)
 model.fit(train_x,train_y)
-
+import numpy as np
 def predict_delay(departure_date_time, origin, destination):
     from datetime import datetime
 
@@ -56,19 +54,26 @@ def predict_delay(departure_date_time, origin, destination):
     print(input)
     return model.predict_proba(pd.DataFrame(input))[0][0]
 
-import numpy as np
-
-labels = ('Oct 1', 'Oct 2', 'Oct 3', 'Oct 4', 'Oct 5', 'Oct 6', 'Oct 7')
-values = (predict_delay('1/12/2019 12:45:00', 'SBGR', 'EGLL'),
-          predict_delay('2/12/2019 12:45:00', 'SBGR', 'EGLL'),
-          predict_delay('3/12/2019 12:45:00', 'SBGR', 'EGLL'),
-          predict_delay('4/12/2019 12:45:00', 'SBGR', 'EGLL'),
-          predict_delay('5/12/2019 12:45:00', 'SBGR', 'EGLL'),
-          predict_delay('6/12/2019 12:45:00', 'SBGR', 'EGLL'),
-          predict_delay('7/12/2019 12:45:00', 'SBGR', 'EGLL'))
-alabels = np.arange(len(labels))
-
-plt.bar(alabels, values, align='center', alpha=0.5)
-plt.xticks(alabels, labels)
-plt.ylabel('Probability of On-Time Arrival')
-plt.ylim((0.0, 1.0))
+def main():
+	try:
+		
+		labels = ('Oct 1', 'Oct 2', 'Oct 3', 'Oct 4', 'Oct 5', 'Oct 6', 'Oct 7')
+		values = (predict_delay('1/12/2019 12:45:00', 'SBGR', 'EGLL'),
+				predict_delay('2/12/2019 12:45:00', 'SBGR', 'EGLL'),
+				predict_delay('3/12/2019 12:45:00', 'SBGR', 'EGLL'),
+				predict_delay('4/12/2019 12:45:00', 'SBGR', 'EGLL'),
+				predict_delay('5/12/2019 12:45:00', 'SBGR', 'EGLL'),
+				predict_delay('6/12/2019 12:45:00', 'SBGR', 'EGLL'),
+				predict_delay('7/12/2019 12:45:00', 'SBGR', 'EGLL'))
+		alabels = np.arange(len(labels))
+		
+		# plt.bar(alabels, values, align='center', alpha=0.5)
+		# plt.xticks(alabels, labels)
+		# plt.ylabel('Probability of On-Time Arrival')
+		# plt.ylim((0.0, 1.0))
+		return values
+	except Exception as e:
+		print(e)
+		
+if __name__ == "__main__":
+    main()
